@@ -1,10 +1,7 @@
-package Services;
+package Logic;
 
 import Basic_classes.Booking;
-import Basic_classes.Seat;
-import Basic_classes.SeatLock;
 
-import java.awt.print.Book;
 import java.util.HashMap;
 import java.util.Map;
 

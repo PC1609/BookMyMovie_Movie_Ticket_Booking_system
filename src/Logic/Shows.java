@@ -1,4 +1,4 @@
-package Services;
+package Logic;
 
 import Basic_classes.Movie;
 import Basic_classes.Screen;

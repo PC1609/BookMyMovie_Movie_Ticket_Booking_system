@@ -1,14 +1,11 @@
-package Services;
+package Logic;
 
 import Basic_classes.Screen;
 import Basic_classes.Seat;
 import Basic_classes.Theatre;
 import Exceptions.NotFoundException;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 public class Theatres {
     Map<String, Theatre> mapTheatre;
@@ -51,11 +48,17 @@ public class Theatres {
         mapScreen.put(id,newScreen);
         return newScreen;
     }
-    public Seat createSeatInScreen(Screen screen, String row, String seat_number){
-        String id = UUID.randomUUID().toString();
-        Seat seat = new Seat(id,row,seat_number);
-        screen.getSeats().add(seat);
-        mapSeat.put(id,seat);
-        return seat;
+    public List<Seat> createSeatInScreen(Screen screen, int rows, int seats_per_row){
+        List<Seat> seats = new ArrayList<>();
+        for (int i=0;i<rows; i++){
+            for (int j=0;j<seats_per_row; j++){
+                String id = UUID.randomUUID().toString();
+                Seat seat = new Seat(id,i+" ",j+" ");
+                seats.add(seat);
+                screen.getSeats().add(seat);
+                mapSeat.put(id,seat);
+            }
+        }
+        return seats;
     }
 }

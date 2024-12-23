@@ -1,9 +1,8 @@
-package Services;
+package Logic;
 
 import Basic_classes.Seat;
 import Basic_classes.SeatLock;
 import Basic_classes.Show;
-import com.sun.jdi.request.InvalidRequestStateException;
 
 import java.util.*;
 
@@ -52,6 +51,7 @@ public class LockSeats implements LockedSeats{
     public List<Seat> getLockedSeats(Show show) {
         List<Seat> lockedSeats = new ArrayList<>();
         Map<Seat,SeatLock> newMap = map.get(show);
+        if (newMap==null){return null;}
         for (Map.Entry<Seat,SeatLock> entry : newMap.entrySet()){
             if (isSeatLocked(show,entry.getKey())){
                 lockedSeats.add(entry.getKey());

@@ -1,11 +1,10 @@
-package Services;
+package Logic;
 
 import Basic_classes.Movie;
 import Exceptions.NotFoundException;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Random;
 import java.util.UUID;
 
 public class Movies {

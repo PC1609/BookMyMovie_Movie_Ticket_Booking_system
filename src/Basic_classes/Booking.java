@@ -9,36 +9,51 @@ public class Booking {
     String user;
     List<Seat> seats;
     Show show;
-    //Screen screen;
-    //Theatre theatre;
     Booking_status status;
 
 
-    public Booking(String id,String user,List<Seat> seats,Show show,Booking_status status ){
+    public Booking(String id,String user,List<Seat> seats,Show show,Booking_status status){
         this.id=id;
         this.user=user;
         this.seats=seats;
         this.show=show;
-        //this.screen=screen;
-        //this.theatre=theatre;
         this.status=status;
     }
 
-
-    public boolean isConfirmed(){
-        return (this.status==Booking_status.CONFIRMED);
-    }
-
-    public String getId(){
+    public String getId() {
         return id;
     }
 
-    public Show getShow(){
-        return this.show;
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getUser() {
+        return user;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
     }
 
     public List<Seat> getSeats() {
-        return this.seats;
+        return seats;
+    }
+
+    public void setSeats(List<Seat> seats) {
+        this.seats = seats;
+    }
+
+    public Show getShow() {
+        return show;
+    }
+
+    public void setShow(Show show) {
+        this.show = show;
+    }
+
+    public boolean isConfirmed(){
+        return (this.status==Booking_status.CONFIRMED);
     }
 
     public void confirmBooking(){
@@ -55,5 +70,6 @@ public class Booking {
         }
         this.status = Booking_status.EXPIRED;
     }
+
 
 }

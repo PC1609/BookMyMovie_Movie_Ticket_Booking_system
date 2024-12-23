@@ -1,4 +1,4 @@
-package Services;
+package Logic;
 
 import Basic_classes.Booking;
 import Basic_classes.Seat;

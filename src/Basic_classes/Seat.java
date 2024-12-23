@@ -16,4 +16,12 @@ public class Seat {
     public String getId(){
         return id;
     }
+
+    public String getRow_number() {
+        return row_number;
+    }
+
+    public String getSeat_no() {
+        return seat_no;
+    }
 }

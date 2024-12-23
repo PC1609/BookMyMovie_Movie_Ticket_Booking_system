@@ -1,4 +1,4 @@
-package Services;
+package Logic;
 
 import Basic_classes.Booking;
 import Basic_classes.Booking_status;
@@ -8,8 +8,6 @@ import Exceptions.NotFoundException;
 import Exceptions.SeatBookedException;
 
 import java.util.*;
-import java.util.concurrent.TimeoutException;
-import java.util.stream.Collectors;
 
 public class Ticket_Booking {
     Map<String, Booking> map;
@@ -46,6 +44,12 @@ public class Ticket_Booking {
                     }
                 }
             }
+            for (Seat seat : seats){
+                if(lockSeats.getLockedSeats(show)!=null && lockSeats.getLockedSeats(show).contains(seat)){
+                    throw new SeatBookedException("Seat is locked, try after some time");
+                }
+            }
+
         String id = UUID.randomUUID().toString();
         Booking newBooking = new Booking(id,user,seats, show, Booking_status.CREATED);
         map.put(id,newBooking);
