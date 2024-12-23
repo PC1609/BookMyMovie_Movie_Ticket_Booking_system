@@ -25,10 +25,10 @@ public class Main {
         Screen screen4 = theatres.createScreen("Screen4", mumbai_talkies);
 
         //create 20 seats per screen
-        List<Seat> seats_screen1 = theatres.createSeatInScreen(screen1, 5,4);
-        List<Seat> seats_screen2 = theatres.createSeatInScreen(screen2, 5,4);
-        List<Seat> seats_screen3 = theatres.createSeatInScreen(screen3, 5,4);
-        List<Seat> seats_screen4 = theatres.createSeatInScreen(screen4, 5,4);
+        List<Seat> seats_screen1 = theatres.createSeatInScreen(screen1, 2,4);
+        List<Seat> seats_screen2 = theatres.createSeatInScreen(screen2, 2,4);
+        List<Seat> seats_screen3 = theatres.createSeatInScreen(screen3, 2,4);
+        List<Seat> seats_screen4 = theatres.createSeatInScreen(screen4, 2,4);
 
         Shows shows = new Shows();
         Calendar calendar = Calendar.getInstance();
@@ -42,7 +42,7 @@ public class Main {
         LockSeats lockSeats = new LockSeats(30);
         Ticket_Booking ticketBooking= new Ticket_Booking(lockSeats);
 
-        //create a confirmed booking showing seats booked
+        //1. create a confirmed booking showing seats booked
         List<Seat> seats_to_book = new ArrayList<>();
         int count = 4;
         for (Seat seat : seats_screen1){
@@ -56,7 +56,7 @@ public class Main {
 
         Payment payment = new Payment(2,lockSeats);
         payment.paymentFailed(booking1, "Priyanka");
-        //payment.paymentFailed(booking1, "Priyanka");
+        //2. payment.paymentFailed(booking1, "Priyanka");
         //payment.paymentFailed(booking1, "Priyanka");
         ticketBooking.confirmBooking(booking1);
 
@@ -67,10 +67,20 @@ public class Main {
             System.out.println(r+ sn);
         }
 
-        //exception when try to book confirmed seats by another user
+        //3. view available seats for a particular show
+        SeatAvailability seatAvailability = new SeatAvailability(ticketBooking, lockSeats);
+        System.out.println("AVAILABLE SEATS OF SHOW1 ARE");
+        for (Seat seat : seatAvailability.getAvailableSeats(show1)){
+            String r = seat.getRow_number();
+            String sn = seat.getSeat_no();
+            System.out.println(seat);
+            System.out.println(r + sn);
+        }
+
+        //4. exception when try to book confirmed seats by another user
         //Booking booking2 = ticketBooking.createBooking(seats_to_book, show1, "Tina", 30);
 
-        //see seats locked for how much time?
+        //5. see seats locked for how much time?
         List<Seat> seats_to_book_show2 = new ArrayList<>();
         int count2 = 3;
         for (Seat seat : seats_screen2){
@@ -89,7 +99,14 @@ public class Main {
                 System.out.println(lockSeats.isSeatLocked(show2, seat));
             }
         }
-
+        //after locking too seats become unavailable, so not visible in available seats
+        System.out.println("AVAILABLE SEATS OF SHOW2 ARE");
+        for (Seat seat : seatAvailability.getAvailableSeats(show2)){
+            String r = seat.getRow_number();
+            String sn = seat.getSeat_no();
+            System.out.println(seat);
+            System.out.println(r + sn);
+        }
 
         System.out.println("Enter if want to execute next fxn");
         ans = scanner.nextInt();
@@ -102,5 +119,6 @@ public class Main {
             ticketBooking.confirmBooking(booking4);
             System.out.println(booking4.getUser());
         }
+
     }
 }
